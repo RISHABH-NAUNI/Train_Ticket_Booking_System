@@ -1,0 +1,9 @@
+<!-- templates/home.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="text-center py-5">
+  <h1 class="display-4">Welcome to Train Ticket Booking System</h1>
+  <p class="lead">Your one-stop solution for hassle-free train ticket bookings, real-time seat availability, and personalized travel experiences.</p>
+  <a class="btn btn-primary btn-lg" href="{{ url_for('search') }}">Search Trains Now</a>
+</div>
+{% endblock %}

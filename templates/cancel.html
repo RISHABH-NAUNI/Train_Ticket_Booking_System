@@ -1,0 +1,14 @@
+<!-- templates/cancel.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="mb-4">Cancel Booking</h2>
+    <p>Are you sure you want to cancel booking ID <strong>{{ booking.id }}</strong> for train <strong>{{ booking.train_id }}</strong>?</p>
+    <form method="post">
+      <button type="submit" class="btn btn-danger">Confirm Cancellation</button>
+      <a class="btn btn-secondary" href="{{ url_for('booking_history') }}">Back to Bookings</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

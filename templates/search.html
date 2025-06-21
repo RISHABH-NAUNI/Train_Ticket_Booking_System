@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="card-title text-center mb-4">Search for Trains</h2>
+        <!-- Form to search trains -->
+        <form method="post">
+          <!-- Source field -->
+          <!-- <div class="mb-3">
+            <label for="source" class="form-label">Source</label>
+            <input 
+              type="text" 
+              id="source" 
+              name="source" 
+              class="form-control" 
+              placeholder="Enter departure city" 
+              required>
+          </div> -->
+          <!-- Source dropdown -->
+          <div class="mb-3">
+            <label for="source" class="form-label">Source</label>
+            <select class="form-select" name="source" id="source" size="3" required style="max-height: 200px; overflow-y: auto;">
+              <option value="City1">City1</option>
+              <option value="City2">City2</option>
+              <option value="City3">City3</option>
+          <!-- Add more if needed -->
+            </select>
+          </div>
+
+
+
+          <!-- Destination field -->
+          <!-- <div class="mb-3">
+            <label for="destination" class="form-label">Destination</label>
+            <input 
+              type="text" 
+              id="destination" 
+              name="destination" 
+              class="form-control" 
+              placeholder="Enter arrival city" 
+              required>
+          </div> -->
+          <!-- Destination field (dynamic dropdown) -->
+          <div class="mb-3">
+            <label for="destination" class="form-label">Destination</label>
+            <select class="form-select" name="destination" id="destination" required>
+              <option value="">Select destination</option>
+            </select>
+          </div>
+
+          <!-- Search button -->
+          <button type="submit" class="btn btn-primary w-100">Search Train</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('source').addEventListener('change', function () {
+    const source = this.value;
+    fetch('/get_destinations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ source }),
+    })
+    .then(response => response.json())
+    .then(destinations => {
+      const destSelect = document.getElementById('destination');
+      destSelect.innerHTML = '<option value="">Select destination</option>';
+      destinations.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        destSelect.appendChild(option);
+      });
+    });
+  });
+</script>
+
+
+{% endblock %}
